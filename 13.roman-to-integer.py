@@ -4,45 +4,29 @@
 # [13] Roman to Integer
 #
 
+# ローマ数字では、小さい値が大きい値の前に現れると減算を表し,
+# 小さい値が大きい値の後または等しい値の後に現れると加算を表すという直感が重要です。
+
 # @lc code=start
 class Solution:
 
     def romanToInt(self, s: str) -> int:
         romanDict = {
             "I":1,
-            "IV":4,
             "V":5,
-            "IX":9,
             "X":10,
-            "XL":40,
             "L":50,
-            "XC":90,
             "C":100,
-            "CD":400,
             "D":500,
-            "CM":900,
             "M":1000
         }
-
-        romanList = list(s)
-        print(romanList)
-        i = 0
         num = 0
-        if len(s) == 1:
-            return romanDict[s]
-        while i < len(s):
-            # print(i)
-            if i == len(s) - 1:
-                num += romanDict[romanList[i]]
-                i += 1
-                continue
-            romanSets = romanList[i] + romanList[i+1]
-            if romanSets in romanDict:
-                num += romanDict[romanSets]
-                i += 2
-                continue
-            num += romanDict[romanList[i]]
-            i += 1
+
+        for i in range(len(s)):
+            if i < len(s) -1 and romanDict[s[i]] < romanDict[s[i+1]]:
+                num -= romanDict[s[i]]
+            else:
+                num += romanDict[s[i]]
         return num
             
 
