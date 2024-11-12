@@ -6,18 +6,13 @@
 
 # @lc code=start
 class Solution:
-    def removeElement(self, nums: list[int], val: int) -> int:
-        k = 0
+    def removeElement(self, nums: List[int], val: int) -> int:
+        index = 0
         for i in range(len(nums)):
-            if nums[k] == val:
-                matchNum = nums.pop(k)
-                nums.append(matchNum)
-            else:
-                k += 1
-        return k
+            if nums[i] != val:
+                nums[index] = nums[i]
+                index += 1
+        return index
 
 # @lc code=end
 
-# 呼び出し
-solution = Solution()
-print(solution.removeElement([2], 3))
