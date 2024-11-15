@@ -6,34 +6,23 @@
 
 # @lc code=start
 class Solution:
-    def addBinary(self, a: str, b: str) -> str:
-        aList = list(a)
-        bList = list(b)
-        if len(a) > len(b):
-            for i in range(len(a) - len(b)):
-                bList.insert(0,'0')
-        elif len(b) > len(a):
-            for i in range(len(b) - len(a)):
-                aList.insert(0,'0')
-        listLen = len(aList)
-        # print(listLen)
-        ansList = []
-        next = 0
-        print(aList)
-        print(bList)
-        for i in range(1, listLen + 1):
-            a = int(aList[listLen - i])
-            b = int(bList[listLen - i])
-            sum = a + b + next
-            print(sum)
-            next = sum // 2
-            print(next)
-            current = sum % 2
-            print(current)
-            ansList.insert(0,str(current))
-        if next == 1:
-            ansList.insert(0,str(next))
-        return ''.join(ansList)
+  def addBinary(self, a: str, b: str) -> str:
+    s = []
+    carry = 0
+    i = len(a) - 1
+    j = len(b) - 1
+
+    while i >= 0 or j >= 0 or carry:
+      if i >= 0:
+        carry += int(a[i])
+        i -= 1
+      if j >= 0:
+        carry += int(b[j])
+        j -= 1
+      s.append(str(carry % 2))
+      carry //= 2
+
+    return ''.join(reversed(s))
     
 # @lc code=end
 
