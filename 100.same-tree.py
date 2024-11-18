@@ -12,32 +12,18 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        p_traversal = []
-        q_traversal = []
-        def traversal_p(t: Optional[TreeNode]):
-            if not t:
-                return
-            traversal_p(t.left())
-            p_traversal.append(t.val)
-            traversal_p(t.right())
-
-        def traversal_q(t: Optional[TreeNode]):
-            if not t:
-                return
-            traversal_q(t.left())
-            q_traversal.append(t.val)
-            traversal_q(t.right())
-
-
-        traversal_p(p)
-        traversal_q(q)
-        if p_traversal == q_traversal:
+    def isSameTree(self, p, q):
+        # 両方のノードがNoneの場合、同一
+        if p is None and q is None:
             return True
+        # 一方のノードだけがNoneの場合、同一ではない
+        if p is None or q is None:
+            return False
+        # 値が等しいかチェックし、左右の部分木を再帰的にチェック
+        if p.val == q.val:
+            return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+        # 値が等しくない場合、同一ではない
         return False
-           
-
-
 
 # @lc code=end
 
