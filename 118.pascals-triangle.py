@@ -7,27 +7,16 @@
 # @lc code=start
 class Solution:
     def generate(self, numRows: int) -> list[list[int]]:
-        pascalsTriangle = []
-        for i in range(numRows):
-            print("i",i)
-            row = []
-            if i == 0:
-                row = [1]
-            elif i == 1:
-                row = [1,1]
-            else:
-                row = [1,1]
-                for j in range(i-1):
-                    print("j",j)
-                    print("pascalsTriangle[i-1]",pascalsTriangle[i-1])
-                    left = pascalsTriangle[i-1][j]
-                    print("left",left)
-                    right = pascalsTriangle[i-1][j+1]
-                    print("right",right)
-                    row.insert(j+1, left+right)
-                    print("row",row)
-            pascalsTriangle.append(row)
-        return pascalsTriangle
+        # 結果を格納するリストを事前に確保
+        triangle = [[1] * (i + 1) for i in range(numRows)]
+        
+        # 3行目から計算を開始
+        for i in range(2, numRows):
+            for j in range(1, i):
+                # 前の行の隣接する要素を加算
+                triangle[i][j] = triangle[i-1][j-1] + triangle[i-1][j]
+        
+        return triangle
             
 # @lc code=end
 
