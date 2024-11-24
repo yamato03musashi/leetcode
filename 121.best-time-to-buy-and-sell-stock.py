@@ -7,12 +7,19 @@
 # @lc code=start
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        maxProfit = 0
-        for i in range(len(prices)):
-            for j in range(i+1, len(prices)):
-                diff = prices[j] - prices[i]
-                if diff > maxProfit:
-                    maxProfit = diff
-        return maxProfit
+        if not prices:
+            return 0
+            
+        min_price = float('inf')  # 最小値を追跡
+        max_profit = 0  # 最大利益を追跡
+        
+        for price in prices:
+            # その時点までの最小価格を更新
+            min_price = min(min_price, price)
+            # その価格での利益を計算し、最大利益を更新
+            current_profit = price - min_price
+            max_profit = max(max_profit, current_profit)
+            
+        return max_profit
 # @lc code=end
 
