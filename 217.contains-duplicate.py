@@ -5,12 +5,17 @@
 #
 
 # @lc code=start
-class Solution:
-    def containsDuplicate(self, nums: List[int]) -> bool:
-        nums.sort()
-        for i in range(len(nums)-1):
-            if nums[i] == nums[i+1]:
+# Time complexity: O(n)
+# Space complexity: O(n)
+class Solution(object):
+    def containsDuplicate(self, nums):
+        # 重複チェックはセット
+        hset = set()
+        for idx in nums:
+            if idx in hset:
                 return True
+            else:
+                hset.add(idx)
         return False
 # @lc code=end
 
