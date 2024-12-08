@@ -19,6 +19,6 @@ class Solution:
         self.invertTree(root.right) #右部分木を呼び出す
         # ノードを交換
         root.left, root.right = root.right, root.left
-        return root #ルートを返す        
+        return root #ルートを返す 子を持たない場合ここまできてそのまま返る
 # @lc code=end
 
